@@ -3,6 +3,9 @@ package crud;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Data
 public class Client {
@@ -12,6 +15,10 @@ public class Client {
 
     @Column(nullable = false)
     private String name;
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    private Set<Ticket> tickets = new HashSet<>();
+
 
     public Long getId() {
         return id;

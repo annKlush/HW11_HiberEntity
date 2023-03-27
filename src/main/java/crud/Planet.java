@@ -1,9 +1,10 @@
 package crud;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -14,6 +15,11 @@ public class Planet {
     @Column(length = 500, nullable = false)
     private String name;
 
+    @OneToMany(mappedBy = "fromPlanet", cascade = CascadeType.ALL)
+    private Set<Ticket> fromPlanetTickets = new HashSet<>();
+
+    @OneToMany(mappedBy = "toPlanet", cascade = CascadeType.ALL)
+    private Set<Ticket> toPlanetTickets = new HashSet<>();
     public String getName() {
         return name;
     }
